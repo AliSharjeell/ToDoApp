@@ -18,7 +18,7 @@ class ToDoTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
       child: Container(
-        padding: EdgeInsets.all(40),
+        padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
         decoration: BoxDecoration(
             color: Color.fromARGB(255, 247, 247, 247),
             borderRadius: BorderRadius.circular(25)),
@@ -29,17 +29,17 @@ class ToDoTile extends StatelessWidget {
               child: Checkbox(
                 value: taskcomplete,
                 onChanged: onChanged,
-                activeColor: Color.fromARGB(255, 0, 0, 0),
+                activeColor: Color.fromARGB(255, 20, 20, 20),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 checkColor: Color.fromARGB(255, 255, 255, 255),
-                visualDensity: VisualDensity(vertical: -1, horizontal: -1),
+                visualDensity: VisualDensity(vertical: 3, horizontal: 3),
               ),
             ),
             Text(taskname,
                 style: GoogleFonts.poppins(
-                    fontSize: 30,
+                    fontSize: 20,
                     decoration: taskcomplete
                         ? TextDecoration.lineThrough
                         : TextDecoration.none)),

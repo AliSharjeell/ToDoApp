@@ -11,17 +11,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List toDoList = [
-    ["Do hw", false],
-    ["Do Assignment", false],
-    ["Make Video", false],
-    ["Study For Quiz", false],
-    ["Make Project", false],
-    ["Help Friend", false]
-  ];
+  final controller1 = TextEditingController();
+
+  List toDoList = [];
   void checkboxchanged(bool? value, int index) {
     setState(() {
       toDoList[index][1] = !toDoList[index][1];
+    });
+  }
+
+  void savenewtask() {
+    setState(() {
+      toDoList.add([controller1.text, false]);
+      controller1.clear();
     });
   }
 
@@ -34,21 +36,45 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: Text('   To Do',
               style: GoogleFonts.poppins(
-                  fontSize: 50, fontWeight: FontWeight.bold)),
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 0, 0, 0))),
           elevation: 0,
+          scrolledUnderElevation: 0,
         ),
-        body: Column(children: [
-          Create(),
-          Expanded(
-              child: ListView.builder(
-            itemCount: toDoList.length,
-            itemBuilder: (context, index) {
-              return ToDoTile(
-                  taskname: toDoList[index][0],
-                  taskcomplete: toDoList[index][1],
-                  onChanged: (value) => checkboxchanged(value, index));
-            },
-          ))
-        ]));
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('      Add',
+                  style: GoogleFonts.poppins(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 20, 20, 20))),
+              Create(
+                controller: controller1,
+                onSave: savenewtask,
+              ),
+              SizedBox(height: 20),
+              Text('      Tasks',
+                  style: GoogleFonts.poppins(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 20, 20, 20))),
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: toDoList.length,
+                itemBuilder: (context, index) {
+                  return ToDoTile(
+                    taskname: toDoList[index][0],
+                    taskcomplete: toDoList[index][1],
+                    onChanged: (value) => checkboxchanged(value, index),
+                  );
+                },
+              ),
+            ],
+          ),
+        ));
   }
 }
