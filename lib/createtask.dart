@@ -9,13 +9,13 @@ class Create extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
       child: Container(
-        padding: EdgeInsets.all(40),
+        padding: EdgeInsets.all(70),
         decoration: BoxDecoration(
             color: Color.fromARGB(255, 247, 247, 247),
             borderRadius: BorderRadius.circular(25)),
         child: Row(
           children: [
-            Text("taskname",
+            Text("Create",
                 style: GoogleFonts.poppins(
                   fontSize: 30,
                 ))

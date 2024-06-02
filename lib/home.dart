@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fulltodoapp/todotile.dart';
+import 'package:fulltodoapp/createtask.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,7 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List toDoList = [
-    ["Do hw", true],
+    ["Do hw", false],
     ["Do Assignment", false],
     ["Make Video", false],
     ["Study For Quiz", false],
@@ -36,14 +37,18 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 50, fontWeight: FontWeight.bold)),
           elevation: 0,
         ),
-        body: ListView.builder(
-          itemCount: toDoList.length,
-          itemBuilder: (context, index) {
-            return ToDoTile(
-                taskname: toDoList[index][0],
-                taskcomplete: toDoList[index][1],
-                onChanged: (value) => checkboxchanged(value, index));
-          },
-        ));
+        body: Column(children: [
+          Create(),
+          Expanded(
+              child: ListView.builder(
+            itemCount: toDoList.length,
+            itemBuilder: (context, index) {
+              return ToDoTile(
+                  taskname: toDoList[index][0],
+                  taskcomplete: toDoList[index][1],
+                  onChanged: (value) => checkboxchanged(value, index));
+            },
+          ))
+        ]));
   }
 }
